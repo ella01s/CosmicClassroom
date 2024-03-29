@@ -5,12 +5,9 @@ import functionality.score.Score;
 
 public class LessonController {
     private final IncorrectAnswersRecord incorrectAnswersRecord;
-    private String userAnswer = "";
     private static Score score = new Score();
 
-    // Constructor
     public LessonController() {
-        // Create an instance of IncorrectAnswersRecord
         this.incorrectAnswersRecord = new IncorrectAnswersRecord();
     }
 
@@ -21,12 +18,12 @@ public class LessonController {
             score.incrementChapter01Score();
             System.out.println(score);
         } else {
-            System.out.println("incorrect");
+            System.out.println("incorrect  :(");
             System.out.println(wrongAnswerResponse);
         }
     }
 
-    public void questionAndAnswer(String question, String optionA, String optionB, String optionC, String optionD){
+    public void generateQuestion(String question, String optionA, String optionB, String optionC, String optionD){
         System.out.println(question);
         System.out.println("A: "+ optionA);
         System.out.println("B: "+ optionB);
@@ -34,7 +31,12 @@ public class LessonController {
         System.out.println("D: "+ optionD);
         System.out.println(" ");
         System.out.println("Type A, B, C or D in the terminal");
-        String userAnswer = InputHelper.readLine();
+    }
+
+    public void generateExplanation(String topic, String lessonInfo){
+        System.out.println("This lesson will discuss "+ topic);
+        System.out.println(" ");
+        System.out.println(lessonInfo);
     }
 
 }

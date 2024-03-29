@@ -3,41 +3,37 @@ package chapter01;
 import functionality.InputHelper;
 import functionality.LessonController;
 import functionality.score.Score;
+import ui.Formatting;
 
 
 public class SimpleRotation {
     private static Score score = new Score();
     private String topic = "Simple Rotation";
     private LessonController lessonController;
-
+    private Formatting formatting;
     public static void main(String[] args) {
         InputHelper.closeScanner();
     }
     public SimpleRotation(LessonController lessonController) {
+
         this.lessonController = lessonController;
+        this.formatting = new Formatting();
     }
 
     public void startLesson(){
-        explain();
-        textBreak();
+        topicInfo();
+        formatting.textBreak();
         questionAndAnswer();
     }
 
-    public void explain(){
-        System.out.println("This lesson will discuss Simple rotation.");
-        System.out.println(" ");
-        System.out.println("In simple rotation, points on a rigid object move on circular paths around an axis of rotation.\n" +
+    public void topicInfo(){
+        lessonController.generateExplanation(topic, "In simple rotation, points on a rigid object move on circular paths around an axis of rotation.\n" +
                 "The axis of rotation is like an imaginary line that runs through an object when it spins or rotates.");
     }
 
     public void questionAndAnswer(){
-        System.out.println("Which of the following is an example of simple rotation?");
-        System.out.println("A: A spinning top spinning in place.");
-        System.out.println("B: A football spinning through the air as it travels across a football pitch.");
-        System.out.println("C: An ice skater spinning on one spot.");
-        System.out.println("D: A pendulum moving from side to side.");
-        System.out.println(" ");
-        System.out.println("Type A, B, C or D in the terminal");
+        lessonController.generateQuestion("Which of the following is an example of simple rotation?", "A spinning top spinning in place.",
+                "A football spinning through the air as it travels across a football pitch.","An ice skater spinning on one spot.", "An ice skater spinning on one spot.");
 
         String userAnswer = InputHelper.readLine();
         lessonController.checkAnswer(userAnswer, "C", "A",
@@ -49,15 +45,10 @@ public class SimpleRotation {
     }
 
     public void tryAgain(){
-        textBreak();
+        formatting.textBreak();
         System.out.println("Try answering the question again");
         System.out.println(" ");
         questionAndAnswer();
-    }
-
-    public void textBreak(){
-        System.out.println("-----------------------------------------------------------------------------------");
-        System.out.println(" ");
     }
 
     public String getTopic() {
