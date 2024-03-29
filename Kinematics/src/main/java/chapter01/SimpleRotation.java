@@ -27,7 +27,7 @@ public class SimpleRotation {
     }
 
     public void topicInfo(){
-        lessonController.generateExplanation(topic, "In simple rotation, points on a rigid object move on circular paths around an axis of rotation.\n" +
+        LessonController.generateExplanation(topic, "In simple rotation, points on a rigid object move on circular paths around an axis of rotation.\n" +
                 "The axis of rotation is like an imaginary line that runs through an object when it spins or rotates.");
     }
 

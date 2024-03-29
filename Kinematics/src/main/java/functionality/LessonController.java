@@ -33,11 +33,13 @@ public class LessonController {
         System.out.println("Type A, B, C or D in the terminal");
     }
 
-    public void generateExplanation(String topic, String lessonInfo){
+    public static void generateExplanation(String topic, String lessonInfo){
         System.out.println("This lesson will discuss "+ topic);
         System.out.println(" ");
         System.out.println(lessonInfo);
     }
+
+
 
 }
 
