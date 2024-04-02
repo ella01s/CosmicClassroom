@@ -17,6 +17,15 @@ public class CSVWriter {
     public static void writeDataToCSV(String filePath, String[] rowData) {
         try {
             boolean isEmpty = isFileEmpty(filePath);
+            if (rowData.length < 2) {
+                System.err.println("Invalid data format: rowData array does not contain enough elements.");
+                return; // Exit the method
+            }
+            String username = rowData[1]; // Assuming the username is at index 1
+            if (!isEmpty && isUsernameExists(filePath, username)) {
+                System.out.println("Username already exists in the database.");
+                return; // Exit the method without adding the username
+            }
             try (FileWriter writer = new FileWriter(filePath, true)) { // 'true' for append mode
                 if (!isEmpty) {
                     writer.append("\n"); // Append newline if file is not empty
@@ -38,6 +47,23 @@ public class CSVWriter {
             System.err.println("Error checking if file is empty: " + e.getMessage());
         }
     }
+
+    private static boolean isUsernameExists(String filePath, String username) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            // Skip the header line
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 2 && parts[1].equals(username)) {
+                    return true; // Username found
+                }
+            }
+        }
+        return false; // Username not found
+    }
+
+
 
     public static boolean isFileEmpty(String filePath) throws IOException {
         File file = new File(filePath);
