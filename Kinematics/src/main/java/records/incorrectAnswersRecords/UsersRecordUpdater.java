@@ -45,14 +45,28 @@ public class UsersRecordUpdater {
     }
 
 
-    public static void getUsername(){
+    public static void getUsername() {
         System.out.println("What is your name? please type it into the terminal");
         String username = InputHelper.readLine();
-        //usernamesRecord.put(generateKey(), username);
-        int userID = generateKey();
-        String[] userdata = {String.valueOf(userID), username};
         String filepath = "/Users/emmanuellasolomon/Documents/Comp_Sci/repos/CosmicClassroom/Kinematics/src/main/resources/UserRecord.csv";
-        CSVWriter.writeDataToCSV(filepath, userdata);
+
+        if (isUsernameAccepted(username, filepath)) {
+            int userID = generateKey();
+            String[] userdata = {String.valueOf(userID), username};
+            CSVWriter.writeDataToCSV(filepath, userdata);
+        } else {
+            System.out.println("Username is not accepted.");
+        }
     }
+
+    private static boolean isUsernameAccepted(String username, String filepath) {
+        try {
+            return !CSVWriter.isUsernameExists(filepath, username);
+        } catch (IOException e) {
+            System.err.println("Error checking username: " + e.getMessage());
+            return false;
+        }
+    }
+
 
 }

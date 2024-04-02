@@ -23,7 +23,8 @@ public class CSVWriter {
             }
             String username = rowData[1]; // Assuming the username is at index 1
             if (!isEmpty && isUsernameExists(filePath, username)) {
-                System.out.println("Username already exists in the database.");
+                System.out.println("Username already exists in the database. Please choose another username");
+                UsersRecordUpdater.getUsername();
                 return; // Exit the method without adding the username
             }
             try (FileWriter writer = new FileWriter(filePath, true)) { // 'true' for append mode
@@ -48,7 +49,7 @@ public class CSVWriter {
         }
     }
 
-    private static boolean isUsernameExists(String filePath, String username) throws IOException {
+    public static boolean isUsernameExists(String filePath, String username) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             // Skip the header line
