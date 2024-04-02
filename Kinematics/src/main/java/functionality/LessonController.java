@@ -11,7 +11,7 @@ public class LessonController {
         this.incorrectAnswersRecord = new IncorrectAnswersRecord();
     }
 
-    public void checkAnswer(String userAnswer, String expected1, String expected2, String wrongAnswerResponse) {
+    public static void checkAnswer(String userAnswer, String expected1, String expected2, String wrongAnswerResponse) {
         if (userAnswer.equalsIgnoreCase(expected1) || userAnswer.equalsIgnoreCase(expected2)) {
             System.out.println("correct");
             score.incrementScore();
@@ -23,7 +23,7 @@ public class LessonController {
         }
     }
 
-    public void generateQuestion(String question, String optionA, String optionB, String optionC, String optionD){
+    public static void generateQuestion(String question, String optionA, String optionB, String optionC, String optionD){
         System.out.println(question);
         System.out.println("A: "+ optionA);
         System.out.println("B: "+ optionB);
