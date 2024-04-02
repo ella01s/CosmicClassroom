@@ -1,4 +1,4 @@
-package chapter01;
+package lessons.chapter01;
 
 import functionality.InputHelper;
 import functionality.LessonController;
@@ -6,7 +6,7 @@ import functionality.score.Score;
 import ui.Formatting;
 
 
-public class SimpleRotation {
+public class SimpleRotationLesson01 {
     private static Score score = new Score();
     private String topic = "Simple Rotation";
     private LessonController lessonController;
@@ -14,7 +14,7 @@ public class SimpleRotation {
     public static void main(String[] args) {
         InputHelper.closeScanner();
     }
-    public SimpleRotation(LessonController lessonController) {
+    public SimpleRotationLesson01(LessonController lessonController) {
 
         this.lessonController = lessonController;
         this.formatting = new Formatting();

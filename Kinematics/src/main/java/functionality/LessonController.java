@@ -38,9 +38,6 @@ public class LessonController {
         System.out.println(" ");
         System.out.println(lessonInfo);
     }
-
-
-
 }
 
 
