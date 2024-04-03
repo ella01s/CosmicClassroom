@@ -5,7 +5,7 @@ public class UserInfo {
     private static String username;
 
     public UserInfo() {
-        // Private constructor to prevent instantiation from outside
+
     }
 
     public static UserInfo getInstance() {

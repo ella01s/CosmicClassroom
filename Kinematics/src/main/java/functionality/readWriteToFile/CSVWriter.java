@@ -75,12 +75,6 @@ public class CSVWriter {
         };
     }
 
-    public static void clearAndRewriteUserRecordHeadings() {
-        clearCSVFile(userRecordFilePath);
-        RewriteCSVFile(userRecordFilePath, "ID, Username, Level");
-        UsersRecordUpdater.setLastKey(0);
-    }
-
     public static void RewriteCSVFile(String filePath, String header) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(header);
@@ -89,5 +83,11 @@ public class CSVWriter {
         } catch (IOException e) {
             System.err.println("Error clearing and rewriting CSV file: " + e.getMessage());
         }
+    }
+
+    public static void clearAndRewriteUserRecordHeadings() {
+        clearCSVFile(userRecordFilePath);
+        RewriteCSVFile(userRecordFilePath, "ID, Username, Level");
+        UsersRecordUpdater.setLastKey(0);
     }
 }

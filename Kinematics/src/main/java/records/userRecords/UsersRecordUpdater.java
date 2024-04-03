@@ -14,7 +14,7 @@ import static records.userRecords.UserInfo.getUsername;
 
 
 public class UsersRecordUpdater {
-    private static final String KEY_FILE = "lastKey.txt";
+    private static final String KEY_FILE = "/Users/emmanuellasolomon/Documents/Comp_Sci/repos/CosmicClassroom/Kinematics/src/main/resources/lastkey.txt";
     private static int lastKey;
     private static UserInfo userInfo;
     private static CompletedLessonsTracker tracker;
@@ -41,7 +41,7 @@ public class UsersRecordUpdater {
 
 
     public static int generateKey() {
-        saveLastKey(lastKey + 1); // Save the new key to the file
+        saveLastKey(lastKey+1); // Save the new key to the file
         return lastKey++;
     }
 
@@ -114,10 +114,5 @@ public class UsersRecordUpdater {
             e.printStackTrace();
         }
     }
-
-
-
-
-
 
 }

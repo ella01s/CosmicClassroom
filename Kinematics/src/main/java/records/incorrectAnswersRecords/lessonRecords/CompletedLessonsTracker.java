@@ -49,8 +49,6 @@ public class CompletedLessonsTracker {
             return -1; // Return a default value or handle appropriately
         }
     }
-
-
     public boolean isLessonCompleted(String topic) {
         return completedLessons.getOrDefault(topic, false);
     }
@@ -88,8 +86,6 @@ public class CompletedLessonsTracker {
         }
     }
 
-
-
     public String getNextIncompleteLesson(int completionLevel, String username) {
         String userLevel = null;
         try {
@@ -115,12 +111,5 @@ public class CompletedLessonsTracker {
 
         return null; // Return null if no lesson is available for the completion level or user's completion level is lower
     }
-
-
-
-
-
-
-
 }
 
