@@ -12,39 +12,20 @@ public class CSVWriter {
 
 
     public static void writeDataToCSV(String filePath, String[] rowData) {
-        try {
-            boolean isEmpty = isFileEmpty(filePath);
-            if (rowData.length < 2) {
-                System.err.println("Invalid data format: rowData array does not contain enough elements.");
-                return; // Exit the method
-            }
-            String username = rowData[1]; // Assuming the username is at index 1
-            if (!isEmpty && isUsernameExists(filePath, username)) {
-                System.out.println("Username already exists in the database. Please choose another username");
-                UsersRecordUpdater.setUser();
-                return; // Exit the method without adding the username
-            }
-            try (FileWriter writer = new FileWriter(filePath, true)) { // 'true' for append mode
-                if (!isEmpty) {
-                    writer.append("\n"); // Append newline if file is not empty
-                } else {
-                    // Write the header if the file is empty
-                    writer.append("ID,Username\n");
+        try (FileWriter writer = new FileWriter(filePath, true)) { // 'true' for append mode
+            for (int i = 0; i < rowData.length; i++) {
+                writer.append(rowData[i]);
+                if (i != rowData.length - 1) {
+                    writer.append(",");
                 }
-                for (int i = 0; i < rowData.length; i++) {
-                    writer.append(rowData[i]);
-                    if (i != rowData.length - 1) {
-                        writer.append(",");
-                    }
-                }
-                System.out.println("Data has been written to the CSV file successfully.");
-            } catch (IOException e) {
-                System.err.println("Error writing data to the CSV file: " + e.getMessage());
             }
+            writer.append("\n"); // Append newline after the row data
+            System.out.println("Data has been written to the CSV file successfully.");
         } catch (IOException e) {
-            System.err.println("Error checking if file is empty: " + e.getMessage());
+            System.err.println("Error writing data to the CSV file: " + e.getMessage());
         }
     }
+
 
 
     public static boolean isUsernameExists(String filePath, String username) throws IOException {

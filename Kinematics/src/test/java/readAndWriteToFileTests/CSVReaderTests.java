@@ -1,24 +1,27 @@
 package readAndWriteToFileTests;
 
 import functionality.readWriteToFile.CSVReader;
+import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.IOException;
 
+import static org.hamcrest.CoreMatchers.is;
+
 public class CSVReaderTests {
-    public static void main(String[] args) {
-        String filePath = "/Users/emmanuellasolomon/Documents/Comp_Sci/repos/CosmicClassroom/Kinematics/src/main/resources/UserRecord.csv"; // Provide the path to your CSV file
-        String username = "jj"; // Provide the username you want to look up
 
-        try {
-            String level = CSVReader.getLevelByUsername(filePath, username);
-            if (level != null) {
-                System.out.println("Level for user " + username + " is: " + level);
-            } else {
-                System.out.println("User " + username + " not found in the CSV.");
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading CSV file: " + e.getMessage());
-        }
+    @ParameterizedTest(name = "Test getLevelByUsername method with username={0} and expected level={1}")
+    @CsvSource({
+            "jj, 0",
+            "ella, 1"
+    })
+    @DisplayName("test getLevelByUsername method")
+    public void testLevelGetter(String username, String expectedLevel) throws IOException {
+        String filePath = "/Users/emmanuellasolomon/Documents/Comp_Sci/repos/CosmicClassroom/Kinematics/src/main/resources/UserRecord.csv";
+        String actual = CSVReader.getLevelByUsername(filePath, username);
+        MatcherAssert.assertThat(actual, is(expectedLevel));
     }
-
 }

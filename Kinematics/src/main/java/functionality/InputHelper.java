@@ -1,9 +1,10 @@
 package functionality;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class InputHelper {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
     private InputHelper() {}
 
     public static String readLine() {
@@ -17,6 +18,11 @@ public class InputHelper {
     }
     public static void closeScanner() {
         scanner.close();
+    }
+
+    // Method to set the input stream (for testing)
+    public static void setInputStream(InputStream inputStream) {
+        scanner = new Scanner(inputStream);
     }
 }
 

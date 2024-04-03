@@ -65,6 +65,7 @@ public class UsersRecordUpdater {
             String[] userdata = {String.valueOf(userID), username, "0"};
             CSVWriter.writeDataToCSV(filepath, userdata);
             UserInfo.getInstance().setname(username);
+            System.out.println("Welcome "+username);
         } else {
             System.out.println("Welcome back "+username);
             UserInfo.getInstance().setname(username);
