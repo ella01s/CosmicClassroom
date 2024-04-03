@@ -1,6 +1,7 @@
 package records.userRecords;
 
 import functionality.InputHelper;
+import functionality.readWriteToFile.CSVReader;
 import functionality.readWriteToFile.CSVWriter;
 import records.incorrectAnswersRecords.lessonRecords.CompletedLessonsTracker;
 
@@ -90,11 +91,12 @@ public class UsersRecordUpdater {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 3 && parts[1].trim().equals(username)) {
-                    // Update the user level
-                    String userLevel = String.valueOf(tracker.getUserCompletionLevel(username));
-                    System.out.println("User level for " + username + " is: " + userLevel);
-                    parts[2] = userLevel;
-                    System.out.println("Updated level for " + username + " to: " + parts[2]);
+                    // Fetch user's current level
+                    int currentLevel = Integer.parseInt(parts[2].trim());
+                    // Increment user's level by 1
+                    int newLevel = currentLevel + 1;
+                    parts[2] = String.valueOf(newLevel);
+                    System.out.println("Updated level for " + username + " from " + currentLevel + " to: " + newLevel);
                 }
                 lines.add(parts);
             }
@@ -112,6 +114,9 @@ public class UsersRecordUpdater {
             e.printStackTrace();
         }
     }
+
+
+
 
 
 
