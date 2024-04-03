@@ -1,13 +1,10 @@
 package functionality.readWriteToFile;
 
-import records.incorrectAnswersRecords.UsersRecordUpdater;
+import records.userRecords.UsersRecordUpdater;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-import static records.incorrectAnswersRecords.UsersRecordUpdater.saveLastKey;
 
 public class CSVWriter {
 
@@ -24,7 +21,7 @@ public class CSVWriter {
             String username = rowData[1]; // Assuming the username is at index 1
             if (!isEmpty && isUsernameExists(filePath, username)) {
                 System.out.println("Username already exists in the database. Please choose another username");
-                UsersRecordUpdater.getUsername();
+                UsersRecordUpdater.setUser();
                 return; // Exit the method without adding the username
             }
             try (FileWriter writer = new FileWriter(filePath, true)) { // 'true' for append mode
@@ -49,6 +46,7 @@ public class CSVWriter {
         }
     }
 
+
     public static boolean isUsernameExists(String filePath, String username) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -63,9 +61,6 @@ public class CSVWriter {
         }
         return false; // Username not found
     }
-
-
-
     public static boolean isFileEmpty(String filePath) throws IOException {
         File file = new File(filePath);
         return file.length() == 0;
@@ -82,7 +77,7 @@ public class CSVWriter {
 
     public static void clearAndRewriteUserRecordHeadings() {
         clearCSVFile(userRecordFilePath);
-        RewriteCSVFile(userRecordFilePath, "ID, Username");
+        RewriteCSVFile(userRecordFilePath, "ID, Username, Level");
         UsersRecordUpdater.setLastKey(0);
     }
 
@@ -109,7 +104,28 @@ public class CSVWriter {
         }
     }
 
-
+    public static void writeLevelToCSV(String username, int level) {
+        try {
+            boolean isEmpty = isFileEmpty(userRecordFilePath);
+            if (isEmpty) {
+                System.err.println("CSV file is empty. Cannot write level.");
+                return; // Exit the method
+            }
+            if (!isUsernameExists(userRecordFilePath, username)) {
+                System.err.println("Username does not exist in the database. Cannot write level.");
+                return; // Exit the method
+            }
+            try (FileWriter writer = new FileWriter(userRecordFilePath, true)) { // 'true' for append mode
+                writer.append("\n"); // Append newline
+                writer.append(",").append(username).append(",").append(Integer.toString(level));
+                System.out.println("Level has been written to the CSV file successfully.");
+            } catch (IOException e) {
+                System.err.println("Error writing level to the CSV file: " + e.getMessage());
+            }
+        } catch (IOException e) {
+            System.err.println("Error checking if file is empty or username exists: " + e.getMessage());
+        }
+    }
 
 
     public static void deleteRowFromCSV(String filePath, int rowToDelete) {

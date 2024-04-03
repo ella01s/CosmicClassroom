@@ -2,15 +2,22 @@ package lessons.chapter01;
 
 import functionality.InputHelper;
 import functionality.LessonController;
+import functionality.readWriteToFile.CSVWriter;
 import functionality.score.Score;
+import records.incorrectAnswersRecords.lessonRecords.CompletedLessonsTracker;
+import records.userRecords.UserInfo;
+import records.userRecords.UsersRecordUpdater;
 import ui.Formatting;
 
 
 public class SimpleRotationLesson01 {
+    private UsersRecordUpdater updater;
     private static Score score = new Score();
-    private String topic = "Simple Rotation";
+    private String topic = "SimpleRotation01";
     private LessonController lessonController;
     private Formatting formatting;
+    private CompletedLessonsTracker tracker;
+    private UserInfo userInfo;
     public static void main(String[] args) {
         InputHelper.closeScanner();
     }
@@ -18,6 +25,9 @@ public class SimpleRotationLesson01 {
 
         this.lessonController = lessonController;
         this.formatting = new Formatting();
+        this.tracker = new CompletedLessonsTracker();
+        this.userInfo = new UserInfo();
+        this.updater = new UsersRecordUpdater(tracker);
     }
 
     public void startLesson(){
@@ -42,6 +52,9 @@ public class SimpleRotationLesson01 {
                         Option B involves both translational motion (the movement across the football pitch) and rotational motion (the spinning).\s
                         Option D describes an oscillatory motion rather than a simple rotation.\s
                         B and D are incorrect because they describe different types of motion, not simple rotation.\s""");
+        this.tracker.markLessonAsComplete(topic);
+        updater.updateUserLevel();
+
     }
 
     public void tryAgain(){
@@ -50,10 +63,4 @@ public class SimpleRotationLesson01 {
         System.out.println(" ");
         questionAndAnswer();
     }
-
-    public String getTopic() {
-        return topic;
-    }
-
-
 }

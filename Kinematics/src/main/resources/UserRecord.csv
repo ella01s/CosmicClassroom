@@ -1,4 +1,7 @@
-ID, Username
+ID, Username, Level
+0,ella,1
+1,bella,0
+2,lucy,0
+3,meg,1
 
-0,ella
-1,Ella
+4,john,1

@@ -7,7 +7,7 @@ import ui.Formatting;
 
 public class DirectionCosinesLesson02 {
     private static Score score = new Score();
-    private String topic = "Direction Cosines";
+    private String topic = "DirectionCosines02";
     private LessonController lessonController;
     private Formatting formatting;
     public static void main(String[] args) {
