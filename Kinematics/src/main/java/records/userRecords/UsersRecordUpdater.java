@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static records.userRecords.UserInfo.getUsername;
+
 
 public class UsersRecordUpdater {
     private static final String KEY_FILE = "lastKey.txt";
@@ -79,7 +81,7 @@ public class UsersRecordUpdater {
         }
     }
 
-    public static void updateUserLevel() {
+    public static void updateUserLevel(String username) {
         String filepath = "/Users/emmanuellasolomon/Documents/Comp_Sci/repos/CosmicClassroom/Kinematics/src/main/resources/UserRecord.csv";
         try {
             BufferedReader br = new BufferedReader(new FileReader(filepath));
@@ -87,8 +89,12 @@ public class UsersRecordUpdater {
             List<String[]> lines = new ArrayList<>();
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length >= 3 && parts[1].trim().equals(userInfo.getUsername())) {
-                    parts[2] = String.valueOf(tracker.getUserCompletionLevel());
+                if (parts.length >= 3 && parts[1].trim().equals(username)) {
+                    // Update the user level
+                    String userLevel = String.valueOf(tracker.getUserCompletionLevel(username));
+                    System.out.println("User level for " + username + " is: " + userLevel);
+                    parts[2] = userLevel;
+                    System.out.println("Updated level for " + username + " to: " + parts[2]);
                 }
                 lines.add(parts);
             }
@@ -106,5 +112,7 @@ public class UsersRecordUpdater {
             e.printStackTrace();
         }
     }
+
+
 
 }

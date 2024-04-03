@@ -18,5 +18,18 @@ public class CSVReader {
         }
         return data;
     }
+
+    public static String getLevelByUsername(String filePath, String username) throws IOException {
+        List<String[]> data = readDataFromCSV(filePath);
+        for (String[] row : data) {
+            if (row.length > 1 && row[1].equals(username)) {
+                return row.length > 2 ? row[2] : null; // Assuming level is in the third column
+            }
+        }
+        return null; // Username not found
+    }
+
+
+
 }
 
